@@ -15,14 +15,15 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 
 // app configuration
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
-   res.sendFile(path.join(__dirname, "/views/index.html"));
+   // res.sendFile(path.join(__dirname, "/views/index.html"));
+   res.render("index");
 });
 
 // routes

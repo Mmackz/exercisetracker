@@ -28,6 +28,10 @@ form {
   border-radius: 5px;
 }
 
+form:first-of-type {
+   margin-right: 0.3rem;
+}
+
 input {
   display: block;
   margin-bottom: 10px;
