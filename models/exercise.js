@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 
 const ExerciseSchema = new Schema({
    username: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
       required: true
    },
    description: {
@@ -13,12 +12,13 @@ const ExerciseSchema = new Schema({
       maxLength: 200
    },
    duration: Number,
-   date: Date,
-   _id: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true
+   date: {
+      type: Date
    }
 });
+
+ExerciseSchema.virtual("date_formatted").get(function() {
+   return this.date.toDateString();
+})
 
 module.exports = mongoose.model("Exercise", ExerciseSchema);
