@@ -1,7 +1,4 @@
-const { body, validationResult } = require("express-validator");
-
 const Exercise = require("../models/exercise");
-const user = require("../models/user");
 const User = require("../models/user");
 
 const dateRegex = /^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
@@ -19,7 +16,7 @@ exports.exercise_create_post = (req, res, next) => {
    }
 
    // check if user id in database
-   User.findById(req.body[":_id"], (err, data) => {
+   User.findById(req.params.id, (err, data) => {
       if (err) return next(err);
       if (data === null) {
          return next("Unknown userId");
