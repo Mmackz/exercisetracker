@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 
 // DB setup
-const mongoDB = "mongodb+srv://MsCluster:MsCluster@cluster0.eejrd.mongodb.net/exercisetracker?retryWrites=true&w=majority";
+const mongoDB = process.env.DB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -26,16 +26,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // DB controllers
 const user_controller = require("./controllers/userController");
+const exercise_controller = require("./controllers/exerciseController");
 
 // routes
 app.get("/", (req, res) => {
-   res.render("index")
+   res.render("index");
 });
 
 app.get("/api/users", user_controller.user_get);
 
 app.post("/api/users", user_controller.user_create_post);
 
+app.post("/api/users/:id/exercises", exercise_controller.exercise_create_post);
 // server activation
 const listener = app.listen(process.env.PORT || 3000, () => {
    console.log("Your app is listening on port " + listener.address().port);
