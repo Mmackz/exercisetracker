@@ -38,6 +38,9 @@ app.get("/api/users", user_controller.user_get);
 app.post("/api/users", user_controller.user_create_post);
 
 app.post("/api/users/:id/exercises", exercise_controller.exercise_create_post);
+
+app.get("/api/users/:id/logs", exercise_controller.exercise_logs_get);
+
 // server activation
 const listener = app.listen(process.env.PORT || 3000, () => {
    console.log("Your app is listening on port " + listener.address().port);
