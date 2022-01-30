@@ -15,7 +15,7 @@ exports.user_create_post = [
       // Create a User object with escaped and trimmed data.
       const user = new User({
          username: req.body.username
-      })
+      });
 
       // check for errors
       if (!errors.isEmpty()) {
@@ -23,9 +23,15 @@ exports.user_create_post = [
       } else {
          user.save((err, data) => {
             if (err) return next(err);
-            res.json(data);
-         })
+            res.json({ username: data.username, _id: data._id });
+         });
       }
    }
-
 ];
+
+exports.user_get = (req, res, next) => {
+   User.find({}, (err, data) => {
+      if (err) return next(err);
+      res.json(data);
+   });
+};

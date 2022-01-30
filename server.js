@@ -32,6 +32,8 @@ app.get("/", (req, res) => {
    res.render("index")
 });
 
+app.get("/api/users", user_controller.user_get);
+
 app.post("/api/users", user_controller.user_create_post);
 
 // server activation
